@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import sequelizeConnection from './app/config/database';
+import { taskRoute } from './routes/taskRoute';
 
 dotenv.config();
 
@@ -24,12 +25,17 @@ class App {
         this.connectionDatabase();
         this.app = express();
         this.middlewares();
+        this.routes();
     }
 
     middlewares() {
         this.app.use(cors(corsOptions));
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(express.json());
+    }
+
+    routes() {
+        this.app.use('/tasks', taskRoute);
     }
 
     async connectionDatabase() {
