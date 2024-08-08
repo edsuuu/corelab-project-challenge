@@ -1,9 +1,12 @@
+import { GlobalStyled } from './styles/GlobalStyled';
+import Navigation from './components/Navigation';
 import React from 'react';
 
 const App: React.FC = () => {
     return (
         <>
-            <h1>hello</h1>
+            <Navigation />
+            <GlobalStyled />
         </>
     );
 };
