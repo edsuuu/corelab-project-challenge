@@ -1,0 +1,14 @@
+services:
+    database-postgres:
+        container_name: database-postgres
+        hostname: db_postgres
+        image: postgres:latest
+        restart: always
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: root
+            POSTGRES_DB: corelab
+        ports:
+            - '5432:5432'
+        volumes:
+            - ~/corelab:/var/lib/postgresql/data
