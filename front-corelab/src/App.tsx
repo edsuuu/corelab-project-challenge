@@ -1,13 +1,15 @@
 import { GlobalStyled } from './styles/GlobalStyled';
 import Navigation from './components/Navigation';
-import React from 'react';
+import React, { useState } from 'react';
 import Home from './Pages/Home';
 
 const App: React.FC = () => {
+    const [pesquisarTask, setPesquisarTask] = useState<string>('');
+
     return (
         <>
-            <Navigation />
-            <Home />
+            <Navigation pesquisarTask={setPesquisarTask} />
+            <Home pequisar={pesquisarTask} />
             <GlobalStyled />
         </>
     );
