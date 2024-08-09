@@ -4,7 +4,12 @@ import { Task } from '../model/Task';
 
 class TaskController {
     async createTask(req: Request, res: Response) {
-        const { title, content, favorite, color }: PayloadReceived = req.body;
+        // eslint-disable-next-line prefer-const
+        let { title, content, favorite, color }: PayloadReceived = req.body;
+
+        if (!color) {
+            color = '#ffffff';
+        }
 
         const obj = { title, content, favorite, color };
 
