@@ -10,7 +10,7 @@ export const Navbar = styled.nav`
     padding: 10px 20px;
 `;
 
-export const Logo = styled.div`
+export const LogoContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,4 +41,10 @@ export const LeftContent = styled.div`
     display: flex;
     flex-direction: row;
     gap: 20px;
+`;
+
+export const CLose = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 `;
