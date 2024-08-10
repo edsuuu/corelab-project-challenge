@@ -5,10 +5,7 @@
     "scripts": {
         "start": "node dist/server.js",
         "build": "npx tsc",
-        "dev": "nodemon src/server.ts",
-        "test": "jest",
-        "test:silent": "jest --watchAll --noStackTrace",
-        "report": "jest --coverage --watchAll --noStackTrace"
+        "dev": "nodemon src/server.ts"
     },
     "keywords": [],
     "author": "",
@@ -24,7 +21,6 @@
     "devDependencies": {
         "@types/cors": "^2.8.17",
         "@types/express": "^4.17.21",
-        "@types/jest": "^29.5.12",
         "@types/node": "^20.14.2",
         "@typescript-eslint/eslint-plugin": "^7.13.1",
         "@typescript-eslint/parser": "^7.13.1",
