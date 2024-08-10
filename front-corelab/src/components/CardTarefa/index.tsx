@@ -171,7 +171,7 @@ const CardTarefa: React.FC<CardTarefaProps> = ({ id, titulo, conteudo, favoriteT
                 </div>
             </Rodape>
             <DataDeCriacao>
-                <small>Criado em {convertData(updated_at)}</small>
+                <small>Atualizado em {convertData(updated_at)}</small>
             </DataDeCriacao>
             {isEdit && (
                 <BoxEdit>
