@@ -5,6 +5,7 @@ import { Container, InputContainer, TextareaInput, TextInput } from './styled';
 
 import API_URL from '../../services/axios';
 import IconStars from '../../assets/IconStars';
+import { toast } from 'react-toastify';
 
 const FormCreateTask: React.FC = () => {
     const [title, setTitle] = useState<string>('');
@@ -30,13 +31,12 @@ const FormCreateTask: React.FC = () => {
 
         if (!title) {
             erros = true;
-            console.log('titulo nao pode ficar vazio');
+            toast.error('Titulo não pode ficar vazio.', { theme: 'colored' });
         }
 
         if (!content) {
             erros = true;
-
-            console.log('conteudo da tarefa não pode ficar vazio');
+            toast.error('Conteudo da tarefa não pode ficar vazio.', { theme: 'colored' });
         }
 
         if (erros) return;
@@ -51,8 +51,11 @@ const FormCreateTask: React.FC = () => {
             setTitle('');
             setContent('');
             setFavorite(false);
+            toast.success('Tarefa criada.', { theme: 'colored' });
 
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         } catch (error) {
             console.log(error);
         }
@@ -65,7 +68,7 @@ const FormCreateTask: React.FC = () => {
                     <TextInput type="text" placeholder="Título" onChange={(e) => handleTitleChange(e)} />
                     <IconStars active={favorite} onClick={handleFavoriteChange} />
                 </InputContainer>
-                <TextareaInput placeholder="Criar nova tarefa..." onChange={(e) => handleContentChange(e)} />
+                <TextareaInput placeholder="Criar nota..." onChange={(e) => handleContentChange(e)} />
                 <button>Criar</button>
             </form>
         </Container>
