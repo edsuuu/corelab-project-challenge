@@ -10,7 +10,10 @@ export const Custom = styled.div`
     align-items: center;
     cursor: pointer;
     &:hover {
-        background-color: #ffb300;
+        background-color: #ffe3b3;
+    }
+    &:active {
+        transform: scale(0.86);
     }
 `;
 

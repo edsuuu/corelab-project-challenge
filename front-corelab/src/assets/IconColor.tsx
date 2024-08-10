@@ -13,6 +13,9 @@ export const Custom = styled.div`
     &:hover {
         background-color: #ffe3b3;
     }
+    &:active {
+        transform: scale(0.86);
+    }
 `;
 const IconColor: React.FC<IIcon> = ({ active, onClick }) => {
     return (
