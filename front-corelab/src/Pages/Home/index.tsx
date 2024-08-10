@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { CardContainer, Container } from './styled';
+import { CardContainer, Container, ContentFavorites } from './styled';
 import CardTarefa from '../../components/CardTarefa';
 import API_URL from '../../services/axios';
 import FormCreateTask from '../../components/FormCreateTask';
+import { toast } from 'react-toastify';
 
 interface Task {
     id: string;
@@ -47,11 +48,16 @@ const Home: React.FC<HomeProps> = ({ pequisar }) => {
             const novasTask = [...tasks];
             novasTask.splice(index, 1);
             setTasks(novasTask);
+
+            toast.success('Tarefa apagada.', { theme: 'colored' });
         } catch (err) {
             console.log(err);
+            toast.error('Ocorreu algum erro.', { theme: 'colored' });
 
             if (err) {
-                window.location.reload();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             }
         }
     };
@@ -59,41 +65,49 @@ const Home: React.FC<HomeProps> = ({ pequisar }) => {
     return (
         <Container>
             <FormCreateTask />
-            <div>
-                <h1>Favoritas</h1>
+            <ContentFavorites>
+                <p>Favoritas</p>
                 <CardContainer>
-                    {favoriteTasks.map((task, index) => (
-                        <CardTarefa
-                            key={task.id}
-                            id={task.id}
-                            titulo={task.title}
-                            conteudo={task.content}
-                            favoriteTask={task.favorite}
-                            color={task.color}
-                            updated_at={task.updated_at}
-                            onClick={() => handleDelete(task.id, index)}
-                        />
-                    ))}
+                    {favoriteTasks && favoriteTasks.length > 0 ? (
+                        favoriteTasks.map((task, index) => (
+                            <CardTarefa
+                                key={task.id}
+                                id={task.id}
+                                titulo={task.title}
+                                conteudo={task.content}
+                                favoriteTask={task.favorite}
+                                color={task.color}
+                                updated_at={task.updated_at}
+                                onClick={() => handleDelete(task.id, index)}
+                            />
+                        ))
+                    ) : (
+                        <h2>Não tem nota favorita cadastrada</h2>
+                    )}
                 </CardContainer>
-            </div>
+            </ContentFavorites>
 
-            <div>
-                <h1>Outras</h1>
+            <ContentFavorites>
+                <p>Outras</p>
                 <CardContainer>
-                    {otherTasks.map((task, index) => (
-                        <CardTarefa
-                            key={task.id}
-                            id={task.id}
-                            titulo={task.title}
-                            conteudo={task.content}
-                            favoriteTask={task.favorite}
-                            color={task.color}
-                            updated_at={task.updated_at}
-                            onClick={() => handleDelete(task.id, index)}
-                        />
-                    ))}
+                    {otherTasks && otherTasks.length > 0 ? (
+                        otherTasks.map((task, index) => (
+                            <CardTarefa
+                                key={task.id}
+                                id={task.id}
+                                titulo={task.title}
+                                conteudo={task.content}
+                                favoriteTask={task.favorite}
+                                color={task.color}
+                                updated_at={task.updated_at}
+                                onClick={() => handleDelete(task.id, index)}
+                            />
+                        ))
+                    ) : (
+                        <h2>Não tem nota cadastrada</h2>
+                    )}
                 </CardContainer>
-            </div>
+            </ContentFavorites>
         </Container>
     );
 };

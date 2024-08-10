@@ -1,13 +1,27 @@
 import { Navbar, LogoContainer, CampoPesquisa, LeftContent, CLose } from './styled';
-import { IoIosSearch } from 'react-icons/io';
-import React from 'react';
-import IconClose from '../../assets/IconClose';
+import React, { useState } from 'react';
+
+import { IoMdClose } from 'react-icons/io';
+import IconSearch from '../../assets/IconSearch';
+import styled from 'styled-components';
 
 interface INavigation {
     pesquisarTask: (searchTerm: string) => void;
 }
 
+export const IconClose = styled(IoMdClose)`
+    color: #9e9e9e;
+    cursor: pointer;
+`;
+
 const Navigation: React.FC<INavigation> = ({ pesquisarTask }) => {
+    const [inputPesquisa, setInputPesquisa] = useState('');
+
+    const clearInput = (): void => {
+        setInputPesquisa('');
+        pesquisarTask('');
+    };
+
     return (
         <Navbar>
             <LeftContent>
@@ -19,10 +33,19 @@ const Navigation: React.FC<INavigation> = ({ pesquisarTask }) => {
                     <p>CoreNotes</p>
                 </LogoContainer>
                 <CampoPesquisa>
-                    <input type="text" placeholder="Pesquisar notas" onChange={(e) => pesquisarTask(e.target.value)} />
-                    <IoIosSearch size={25} />
+                    <input
+                        type="text"
+                        value={inputPesquisa}
+                        placeholder="Pesquisar notas"
+                        onChange={(e) => {
+                            setInputPesquisa(e.target.value);
+                            pesquisarTask(e.target.value);
+                        }}
+                    />
+                    {inputPesquisa ? <IconClose onClick={clearInput} /> : <IconSearch />}
                 </CampoPesquisa>
             </LeftContent>
+
             <CLose>
                 <IconClose />
             </CLose>
